@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 // Getx package
 import 'package:get/get.dart';
 
-// Firebase
+// Firebase Core + firebase_options
 import 'package:firebase_core/firebase_core.dart';
-import 'package:note_taking_app/Pages/home/home_page.dart';
-import 'package:note_taking_app/Pages/login/login_page.dart';
 import 'package:note_taking_app/firebase_options.dart';
 
 // Firebase Authentication
 import 'package:firebase_auth/firebase_auth.dart';
+
+// Project Pages import
+import 'package:note_taking_app/Pages/home/home_page.dart';
+import 'package:note_taking_app/Pages/login/login_page.dart';
 
 // it will initialize our Flutter Firebase app before starting the App
 
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // using GetMaterialApp for GetX functionality
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
@@ -43,8 +46,10 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            // if user logged in then Go to HomePage
             return const HomePage();
           } else {
+            // after logout user will go to LogInPage
             return const LogInPage();
           }
         },
