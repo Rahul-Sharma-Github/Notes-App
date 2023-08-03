@@ -30,13 +30,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Notes App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      // use StreamBuilder for Firebase Authentication purpose (login/sign up Page Switching)
-      // [ use Firebase Pre-Built userChanges() Method inside StreamBuilder ]
+      // using StreamBuilder for Firebase Authentication purpose (login/signup & HomePage Switching)
+      // [ using FirebaseAuth Pre-Built authStateChanges() Method inside StreamBuilder ]
+      // It will fire event everytime whenever user login or logout
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
