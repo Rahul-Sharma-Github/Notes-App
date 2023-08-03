@@ -5,7 +5,17 @@ import 'package:flutter/material.dart';
 // Getx package
 import 'package:get/get.dart';
 
-void main() {
+// Firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'package:note_taking_app/firebase_options.dart';
+
+// it will initialize our Flutter Firebase app before starting the App
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
