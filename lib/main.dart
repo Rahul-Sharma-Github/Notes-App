@@ -16,6 +16,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:note_taking_app/Pages/home/home_page.dart';
 import 'package:note_taking_app/Pages/login/login_page.dart';
 
+import 'Authentication_Services/auth_controller.dart';
+
 // it will initialize our Flutter Firebase app before starting the App
 
 Future<void> main() async {
@@ -23,12 +25,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     // using GetMaterialApp for GetX functionality
@@ -46,9 +49,13 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            // setting isLogin variable to true
+            authController.isLogin.value = true;
             // if user logged in then Go to HomePage
             return const HomePage();
           } else {
+            // setting isLogin variable to false
+            authController.isLogin.value = false;
             // after logout user will go to LogInPage
             return const LogInPage();
           }
