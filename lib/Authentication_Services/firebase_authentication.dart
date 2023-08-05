@@ -93,31 +93,4 @@ class AuthenticationServices {
       print(e);
     }
   }
-
-  // // Signed In User's Information
-  // // storing signed in user's information into variables
-  // static Future saveUserInformation(User user) async {
-  //   try {
-  //     var userUID = user.uid;
-  //     var userName = user.displayName;
-  //     var userEmail = user.email;
-  //     var userPhoneNumber = user.phoneNumber;
-  //     var userProfilePhoto = user.photoURL;
-  //     var userAccountCreationTime = user.metadata.creationTime;
-  //     var userLastSignInTime = user.metadata.lastSignInTime;
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // // Updatinng Signed In User's Information
-  // static Future updateUserInformation(
-  //     User user, String name, String photoUrl) async {
-  //   try {
-  //     await user.updateDisplayName(name);
-  //     await user.updatePhotoURL(photoUrl);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 }
