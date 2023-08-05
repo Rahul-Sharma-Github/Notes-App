@@ -16,6 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:note_taking_app/Pages/home/home_page.dart';
 import 'package:note_taking_app/Pages/login/login_page.dart';
 
+// Auth_controller
 import 'Authentication_Services/auth_controller.dart';
 
 // it will initialize our Flutter Firebase app before starting the App

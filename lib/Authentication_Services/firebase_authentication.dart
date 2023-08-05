@@ -46,6 +46,11 @@ class Authentication {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
       Get.snackbar('', 'Logged In Successfully !');
+
+      // after sign in we are getting user's information
+      var userInformation = credential.user!;
+      // Storing User Profile Information into variables
+      saveUserInformation(userInformation);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar('Warning', 'No user found for that email.');
@@ -74,12 +79,14 @@ class Authentication {
   // User Account Delete Service
   static Future deleteUserAccount(AuthController authController) async {
     try {
-      if (authController.isLogin.value == true) {
-        await FirebaseAuth.instance.currentUser!.delete().then(
-              (value) => Get.snackbar('', 'User Account Deleted !'),
-            );
-      } else {
+      await FirebaseAuth.instance.currentUser!.delete().then(
+            (value) => Get.snackbar('', 'User Account Deleted !'),
+          );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
         Get.snackbar('', 'First, SignIn with a User Account !');
+        print(
+            'The user must reauthenticate before this operation can be executed.');
       }
     } catch (e) {
       print(e);
