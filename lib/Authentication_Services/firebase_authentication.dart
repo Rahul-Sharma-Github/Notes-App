@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'auth_controller.dart';
 
-class Authentication {
+class AuthenticationServices {
   // AuthController for state management
   final AuthController authController = Get.put(AuthController());
 
@@ -18,12 +18,13 @@ class Authentication {
         email: emailAddress,
         password: password,
       );
-      Get.snackbar('', 'Account created Successfully !');
 
       // after sign in we are getting user's information
       var userInformation = credential.user;
-      // Storing User Profile Information into variables
-      saveUserInformation(userInformation!);
+      // updating user's Display Name
+      await userInformation?.updateDisplayName(name);
+
+      Get.snackbar('', 'Account created Successfully !');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar('Warning', 'The password provided is too weak.');
@@ -49,8 +50,8 @@ class Authentication {
 
       // after sign in we are getting user's information
       var userInformation = credential.user!;
-      // Storing User Profile Information into variables
-      saveUserInformation(userInformation);
+      // // Storing User Profile Information into variables
+      // saveUserInformation(userInformation);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar('Warning', 'No user found for that email.');
@@ -93,30 +94,30 @@ class Authentication {
     }
   }
 
-  // Signed In User's Information
-  // storing signed in user's information into variables
-  static Future saveUserInformation(User user) async {
-    try {
-      var userUID = user.uid;
-      var userName = user.displayName;
-      var userEmail = user.email;
-      var userPhoneNumber = user.phoneNumber;
-      var userProfilePhoto = user.photoURL;
-      var userAccountCreationTime = user.metadata.creationTime;
-      var userLastSignInTime = user.metadata.lastSignInTime;
-    } catch (e) {
-      print(e);
-    }
-  }
+  // // Signed In User's Information
+  // // storing signed in user's information into variables
+  // static Future saveUserInformation(User user) async {
+  //   try {
+  //     var userUID = user.uid;
+  //     var userName = user.displayName;
+  //     var userEmail = user.email;
+  //     var userPhoneNumber = user.phoneNumber;
+  //     var userProfilePhoto = user.photoURL;
+  //     var userAccountCreationTime = user.metadata.creationTime;
+  //     var userLastSignInTime = user.metadata.lastSignInTime;
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
-  // Updatinng Signed In User's Information
-  static Future updateUserInformation(
-      User user, String name, String photoUrl) async {
-    try {
-      await user.updateDisplayName(name);
-      await user.updatePhotoURL(photoUrl);
-    } catch (e) {
-      print(e);
-    }
-  }
+  // // Updatinng Signed In User's Information
+  // static Future updateUserInformation(
+  //     User user, String name, String photoUrl) async {
+  //   try {
+  //     await user.updateDisplayName(name);
+  //     await user.updatePhotoURL(photoUrl);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 }
