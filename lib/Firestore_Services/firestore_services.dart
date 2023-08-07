@@ -5,9 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//
+import 'package:intl/intl.dart';
+import 'package:note_taking_app/Pages/notes_details/notes_details_controller.dart';
+
 import '../Pages/notes_details/notes_details_page.dart';
 
 class FirestoreServices {
+  // Notes Controller initialization
+  static NotesDetailsController notesDetailsController =
+      Get.put(NotesDetailsController());
+
   // Getting and initializing an Instance of our Cloud Firestore Database
   static var db = FirebaseFirestore.instance;
 
@@ -27,6 +35,8 @@ class FirestoreServices {
           .add(docData)
           .then((documentSnapshot) =>
               print("Added Data with ID: ${documentSnapshot.id}"));
+
+      Get.snackbar('Note Added !', '');
     } catch (e) {
       print(e);
     }
@@ -45,6 +55,8 @@ class FirestoreServices {
             (doc) => print("Document deleted"),
             onError: (e) => print("Error updating document $e"),
           );
+      Get.back();
+      Get.snackbar('Note Deleted !', '');
     } catch (e) {
       print(e);
     }
@@ -52,7 +64,7 @@ class FirestoreServices {
 
   // Update a specific document from 'notes' collection
   static Future updateData(
-      String index, String topic, String description) async {
+      String index, String topic, String description, String datetime) async {
     try {
       await db
           .collection('users')
@@ -60,9 +72,11 @@ class FirestoreServices {
           .collection('notes')
           .doc(index)
           .update(
-        {"topic": topic, "description": description},
+        {"topic": topic, "description": description, "datetime": datetime},
       ).then((value) => print("DocumentSnapshot successfully updated!"),
               onError: (e) => print("Error updating document $e"));
+      Get.back();
+      Get.snackbar('Note Updated !', '');
     } catch (e) {
       print(e);
     }
@@ -81,38 +95,48 @@ class FirestoreServices {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
+            padding: const EdgeInsets.all(15),
             itemCount: snapshot.data?.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot docSnapshot = snapshot.data!.docs[index];
-              return Ink(
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Ink(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  title: Text(
-                    docSnapshot['topic'],
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(12),
+                    tileColor: Colors.amberAccent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    title: Text(
+                      docSnapshot['topic'],
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      docSnapshot['datetime'],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    onTap: () {
+                      // closing the Bottomsheet
+                      notesDetailsController.isOpen.value = false;
+
+                      Get.to(
+                        () => NotesDetailsPage(
+                          index: docSnapshot.id,
+                          topic: docSnapshot['topic'],
+                          description: docSnapshot['description'],
+                          date: docSnapshot['datetime'],
+                        ),
+                      );
+                    },
                   ),
-                  subtitle: Text(
-                    docSnapshot['datetime'],
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onTap: () {
-                    Get.to(
-                      () => NotesDetailsPage(
-                        index: docSnapshot.id,
-                        topic: docSnapshot['topic'],
-                        description: docSnapshot['description'],
-                        date: docSnapshot['datetime'],
-                      ),
-                    );
-                  },
                 ),
               );
             },
@@ -128,7 +152,8 @@ class FirestoreServices {
 
   // Getting Current Date
   static String getCurrentDateTime() {
-    String currentDateTime = DateTime.now().toString();
-    return currentDateTime;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat.yMMMEd().format(now);
+    return formattedDate;
   }
 }

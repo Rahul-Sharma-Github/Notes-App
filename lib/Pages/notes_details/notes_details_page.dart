@@ -172,16 +172,15 @@ class NotesDetailsPage extends StatelessWidget {
                           } else {
                             // getting field data and storing into variables
                             var topic = topicController.text;
-                            var description = topicController.text;
-
+                            var description = descriptionController.text;
+                            var datetime =
+                                FirestoreServices.getCurrentDateTime();
                             // updating the note
                             FirestoreServices.updateData(
-                                index, topic, description);
+                                index, topic, description, datetime);
 
                             // closing the Bottomsheet
                             notesDetailsController.isOpen.value = false;
-
-                            Get.snackbar('Note Updated !', '');
                           }
                         },
                         child: const Text('Update'),

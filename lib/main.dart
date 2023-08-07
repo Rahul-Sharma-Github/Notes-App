@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 // Firebase Core + firebase_options
 import 'package:firebase_core/firebase_core.dart';
+import 'package:note_taking_app/Pages/login/login_page.dart';
 import 'package:note_taking_app/firebase_options.dart';
 
 // Firebase Authentication
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
             // setting isLogin variable to false
             authController.isLogin.value = false;
             // after logout user will go to LogInPage
-            return const HomePage();
+            return const LogInPage();
           }
         },
       ),

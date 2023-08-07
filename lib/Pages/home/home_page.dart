@@ -17,10 +17,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notes'),
+      ),
       body: SafeArea(
         child: Container(
-            // child: FirestoreServices.readNotes(),
-            ),
+          child: FirestoreServices.readNotes(),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child:
@@ -96,10 +99,14 @@ class HomePage extends StatelessWidget {
 
                                   // Adding this map to Database with user's UID
 
-                                  // FirestoreServices.addData(
-                                  //   mapData,
-                                  //   FirestoreServices.userUID,
-                                  // );
+                                  FirestoreServices.addData(
+                                    mapData,
+                                    FirestoreServices.userUID,
+                                  );
+
+                                  // Resetting TextField
+                                  topicController.clear();
+                                  descriptionController.clear();
                                 }
                               },
                               child: const Padding(
