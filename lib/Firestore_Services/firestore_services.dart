@@ -52,18 +52,16 @@ class FirestoreServices {
 
   // Update a specific document from 'notes' collection
   static Future updateData(
-      String index, String topic, String description, String date) async {
+      String index, String topic, String description) async {
     try {
       await db
           .collection('users')
           .doc(userUID)
           .collection('notes')
           .doc(index)
-          .update({
-        "topic": topic,
-        "description": description,
-        "date": date
-      }).then((value) => print("DocumentSnapshot successfully updated!"),
+          .update(
+        {"topic": topic, "description": description},
+      ).then((value) => print("DocumentSnapshot successfully updated!"),
               onError: (e) => print("Error updating document $e"));
     } catch (e) {
       print(e);

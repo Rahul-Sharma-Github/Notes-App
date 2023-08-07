@@ -14,10 +14,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Project Pages import
 import 'package:note_taking_app/Pages/home/home_page.dart';
-import 'package:note_taking_app/Pages/login/login_page.dart';
 
 // Auth_controller
 import 'Authentication_Services/auth_controller.dart';
+import 'Pages/notes_details/notes_details_page.dart';
 
 // it will initialize our Flutter Firebase app before starting the App
 
@@ -32,6 +32,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
+  //AuthenticationController
   final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,12 @@ class MyApp extends StatelessWidget {
             // setting isLogin variable to false
             authController.isLogin.value = false;
             // after logout user will go to LogInPage
-            return const LogInPage();
+            return const NotesDetailsPage(
+              index: 'bakbakaj',
+              topic: 'abdbjak',
+              description: 'abkbkaksbaksk',
+              date: '12-5-22',
+            );
           }
         },
       ),
