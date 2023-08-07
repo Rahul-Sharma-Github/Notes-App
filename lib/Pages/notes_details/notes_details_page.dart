@@ -35,36 +35,86 @@ class NotesDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          InkWell(
-            child: const Icon(
-              Icons.edit,
-            ),
-            onTap: () {
-              // setting TextField's initial Text
-              topicController.text = topic;
-              descriptionController.text = description;
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: InkWell(
+              child: const Icon(
+                Icons.edit,
+                color: Colors.black,
+                size: 32,
+              ),
+              onTap: () {
+                // setting TextField's initial Text
+                topicController.text = topic;
+                descriptionController.text = description;
 
-              // showing bottomSheet
-              notesDetailsController.isOpen.value = true;
-            },
-          ),
-          InkWell(
-            child: const Icon(
-              Icons.delete_forever,
+                // showing bottomSheet
+                notesDetailsController.isOpen.value = true;
+              },
             ),
-            onTap: () {
-              FirestoreServices.deleteData(index);
-            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: InkWell(
+              child: const Icon(
+                Icons.delete_forever,
+                color: Colors.red,
+                size: 32,
+              ),
+              onTap: () {
+                FirestoreServices.deleteData(index);
+              },
+            ),
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Text(topic),
-            Text(description),
-            Text(date),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Row(
+                children: [
+                  Text(
+                    'Topic',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(topic),
+              ),
+              const Divider(),
+              const Row(
+                children: [
+                  Text(
+                    'Description',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(description),
+              ),
+              const Divider(),
+              const Row(
+                children: [
+                  Text(
+                    'Date',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(date),
+              ),
+            ],
+          ),
         ),
       ),
       // Bottom Sheet for Updating the Note
