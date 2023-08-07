@@ -71,7 +71,7 @@ class FirestoreServices {
   // Read Operations
 
   // Reading all Notes
-  static Future<Widget> readNotes() async {
+  static readNotes() {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('users')
@@ -99,7 +99,7 @@ class FirestoreServices {
                     overflow: TextOverflow.ellipsis,
                   ),
                   subtitle: Text(
-                    docSnapshot['date'],
+                    docSnapshot['datetime'],
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -109,7 +109,7 @@ class FirestoreServices {
                         index: docSnapshot.id,
                         topic: docSnapshot['topic'],
                         description: docSnapshot['description'],
-                        date: docSnapshot['date'],
+                        date: docSnapshot['datetime'],
                       ),
                     );
                   },
@@ -118,11 +118,17 @@ class FirestoreServices {
             },
           );
         } else {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );
   }
 
-  // Reading specific document for notes_details Page using index
+  // Getting Current Date
+  static String getCurrentDateTime() {
+    String currentDateTime = DateTime.now().toString();
+    return currentDateTime;
+  }
 }

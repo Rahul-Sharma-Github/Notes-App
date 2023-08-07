@@ -17,7 +17,6 @@ import 'package:note_taking_app/Pages/home/home_page.dart';
 
 // Auth_controller
 import 'Authentication_Services/auth_controller.dart';
-import 'Pages/notes_details/notes_details_page.dart';
 
 // it will initialize our Flutter Firebase app before starting the App
 
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
       ),
       // using StreamBuilder for Firebase Authentication purpose (login/signup & HomePage Switching)
@@ -59,12 +58,7 @@ class MyApp extends StatelessWidget {
             // setting isLogin variable to false
             authController.isLogin.value = false;
             // after logout user will go to LogInPage
-            return const NotesDetailsPage(
-              index: 'bakbakaj',
-              topic: 'abdbjak',
-              description: 'abkbkaksbaksk',
-              date: '12-5-22',
-            );
+            return const HomePage();
           }
         },
       ),
