@@ -25,6 +25,8 @@ class AuthenticationServices {
       await userInformation?.updateDisplayName(name);
 
       Get.snackbar('', 'Account created Successfully !');
+
+      // Get.to(() => const HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar('Warning', 'The password provided is too weak.');
@@ -47,11 +49,7 @@ class AuthenticationServices {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
       Get.snackbar('', 'Logged In Successfully !');
-
-      // after sign in we are getting user's information
-      var userInformation = credential.user!;
-      // // Storing User Profile Information into variables
-      // saveUserInformation(userInformation);
+      // Get.to(() => const HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar('Warning', 'No user found for that email.');
@@ -78,11 +76,12 @@ class AuthenticationServices {
   }
 
   // User Account Delete Service
-  static Future deleteUserAccount(AuthController authController) async {
+  static Future deleteUserAccount() async {
     try {
       await FirebaseAuth.instance.currentUser!.delete().then(
             (value) => Get.snackbar('', 'User Account Deleted !'),
           );
+      // Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
         Get.snackbar('', 'First, SignIn with a User Account !');

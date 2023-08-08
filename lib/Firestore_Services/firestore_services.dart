@@ -142,9 +142,15 @@ class FirestoreServices {
             },
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return const Center(
+              child: Text('Add Your Notes Now !'),
+            );
+          }
         }
       },
     );

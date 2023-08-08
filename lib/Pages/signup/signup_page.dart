@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:note_taking_app/Pages/login/login_page.dart';
 
 import '../../Authentication_Services/firebase_authentication.dart';
 
@@ -105,13 +104,15 @@ class SignUpPage extends StatelessWidget {
                             print('Sign Up Form is Valid.');
 
                             // Getting Text from textformfield
-                            var name = emailController.text;
+                            var name = nameController.text;
                             var emailAddress = emailController.text;
                             var password = passwordController.text;
 
                             // Signing Up the User Account through Firebase Authentication Feature
                             AuthenticationServices.signUp(
                                 emailAddress, password, name);
+
+                            Get.back();
                           }
                         },
                         child: const Text('Sign Up'),
@@ -126,7 +127,7 @@ class SignUpPage extends StatelessWidget {
                     InkWell(
                       child: const Text('Sign In'),
                       onTap: () {
-                        Get.to(() => const LogInPage());
+                        Get.back();
                       },
                     ),
                   ],

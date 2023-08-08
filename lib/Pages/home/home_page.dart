@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Authentication_Services/firebase_authentication.dart';
 import '../../Firestore_Services/firestore_services.dart';
 import 'home_controller.dart';
 
@@ -19,6 +21,39 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
+      ),
+      drawer: Drawer(
+        child: ListView(children: [
+          DrawerHeader(
+            decoration: const BoxDecoration(color: Colors.yellow),
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(FirebaseAuth.instance.currentUser?.displayName ?? ''),
+                Text(FirebaseAuth.instance.currentUser?.email ?? ''),
+              ],
+            ),
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(15),
+            title: const Text('Sign Out'),
+            trailing: const Icon(Icons.logout),
+            onTap: () {
+              AuthenticationServices.signOut();
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(15),
+            title: const Text('Delete Account'),
+            trailing: const Icon(Icons.person_off_outlined),
+            onTap: () {
+              AuthenticationServices.deleteUserAccount();
+            },
+          ),
+        ]),
       ),
       body: SafeArea(
         child: Container(
