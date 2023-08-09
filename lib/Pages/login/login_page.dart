@@ -139,7 +139,11 @@ class LogInPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Get.to(() => const SignUpPage());
+                        Get.to(
+                          transition: Transition.cupertino,
+                          // duration: const Duration(seconds: 1),
+                          () => const SignUpPage(),
+                        );
                       },
                     ),
                   ],

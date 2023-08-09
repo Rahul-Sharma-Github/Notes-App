@@ -128,6 +128,7 @@ class FirestoreServices {
                       notesDetailsController.isOpen.value = false;
 
                       Get.to(
+                        transition: Transition.cupertino,
                         () => NotesDetailsPage(
                           index: docSnapshot.id,
                           topic: docSnapshot['topic'],

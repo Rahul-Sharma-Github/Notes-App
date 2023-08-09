@@ -18,15 +18,11 @@ class AuthenticationServices {
         email: emailAddress,
         password: password,
       );
-
-      // after sign in we are getting user's information
-      var userInformation = credential.user;
       // updating user's Display Name
-      await userInformation?.updateDisplayName(name);
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
+      await FirebaseAuth.instance.currentUser?.reload();
 
       Get.snackbar('', 'Account created Successfully !');
-
-      // Get.to(() => const HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar('Warning', 'The password provided is too weak.');
