@@ -19,6 +19,9 @@ import 'package:note_taking_app/Pages/home/home_page.dart';
 // Auth_controller
 import 'Authentication_Services/auth_controller.dart';
 
+// Device Preview
+import 'package:device_preview/device_preview.dart';
+
 // it will initialize our Flutter Firebase app before starting the App
 
 Future<void> main() async {
@@ -26,7 +29,15 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools,
+      ],
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +49,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // using GetMaterialApp for GetX functionality
     return GetMaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
       theme: ThemeData(
