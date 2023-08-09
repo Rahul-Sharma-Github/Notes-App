@@ -27,18 +27,31 @@ class SignUpPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(height: 50),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Sign Up'),
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Create an account to continue'),
+                    Text(
+                      'Create an account to continue',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
+                const SizedBox(height: 50),
                 Form(
                   key: formKeySignUp,
                   child: Column(
@@ -62,6 +75,7 @@ class SignUpPage extends StatelessWidget {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 20),
                       TextFormField(
                         controller: emailController,
                         decoration: InputDecoration(
@@ -79,6 +93,7 @@ class SignUpPage extends StatelessWidget {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 20),
                       TextFormField(
                         controller: passwordController,
                         decoration: InputDecoration(
@@ -96,6 +111,7 @@ class SignUpPage extends StatelessWidget {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () {
                           if (formKeySignUp.currentState!.validate()) {
@@ -115,23 +131,37 @@ class SignUpPage extends StatelessWidget {
                             Get.back();
                           }
                         },
-                        child: const Text('Sign Up'),
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Already have an account?'),
+                    const Text(
+                      'Already have an account?',
+                      style: TextStyle(fontSize: 15),
+                    ),
                     InkWell(
-                      child: const Text('Sign In'),
+                      child: const Text(
+                        '   Sign In',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       onTap: () {
                         Get.back();
                       },
                     ),
                   ],
                 ),
+                const SizedBox(height: 50),
               ],
             ),
           ),
