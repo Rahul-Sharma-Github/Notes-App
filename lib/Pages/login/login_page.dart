@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_taking_app/Pages/signup/signup_page.dart';
+import 'package:note_taking_app/constants/colors.dart';
 
 import '../../Authentication_Services/firebase_authentication.dart';
 
@@ -116,7 +117,8 @@ class LogInPage extends StatelessWidget {
                         },
                         child: const Text(
                           'Sign In',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(
+                              fontSize: 18, color: AppColors.buttonTextColor),
                         ),
                       ),
                     ],

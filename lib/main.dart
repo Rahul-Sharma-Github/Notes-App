@@ -22,6 +22,8 @@ import 'Authentication_Services/auth_controller.dart';
 // Device Preview
 import 'package:device_preview/device_preview.dart';
 
+import 'constants/colors.dart';
+
 // it will initialize our Flutter Firebase app before starting the App
 
 Future<void> main() async {
@@ -55,7 +57,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        // colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellowBase),
+        // Button Theme
+        elevatedButtonTheme: const ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(AppColors.yellowBase),
+          ),
+        ),
+        // FloatingActionButton Theme
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: AppColors.floatingActionButton),
+        // brightness: Brightness.dark,
         useMaterial3: true,
       ),
       // using StreamBuilder for Firebase Authentication purpose (login/signup & HomePage Switching)

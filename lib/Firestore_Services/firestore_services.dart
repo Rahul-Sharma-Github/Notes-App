@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:note_taking_app/Pages/notes_details/notes_details_controller.dart';
 
 import '../Pages/notes_details/notes_details_page.dart';
+import '../constants/colors.dart';
 
 class FirestoreServices {
   // Notes Controller initialization
@@ -107,7 +108,7 @@ class FirestoreServices {
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(12),
-                    tileColor: Colors.amberAccent,
+                    tileColor: AppColors.noteColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../Authentication_Services/firebase_authentication.dart';
 import '../../Firestore_Services/firestore_services.dart';
+import '../../constants/colors.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,7 +26,8 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(children: [
           DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.yellow),
+            decoration:
+                const BoxDecoration(color: AppColors.floatingActionButton),
             padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,6 +59,7 @@ class HomePage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
+          // Fetching all the Notes from Database
           child: FirestoreServices.readNotes(),
         ),
       ),
@@ -80,6 +83,7 @@ class HomePage extends StatelessWidget {
         () => Container(
           child: homeController.isOpen.value
               ? BottomSheet(
+                  enableDrag: false,
                   onClosing: () {},
                   builder: (context) {
                     return SingleChildScrollView(
@@ -146,7 +150,11 @@ class HomePage extends StatelessWidget {
                               },
                               child: const Padding(
                                 padding: EdgeInsets.all(15.0),
-                                child: Text('Add this Note'),
+                                child: Text(
+                                  'Add this Note',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 16),
+                                ),
                               ),
                             ),
                             const SizedBox(

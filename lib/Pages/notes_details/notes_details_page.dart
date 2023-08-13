@@ -130,7 +130,8 @@ class NotesDetailsPage extends StatelessWidget {
                   children: [
                     // text field for entering topic
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 10),
                       child: TextFormField(
                         controller: topicController,
                         keyboardType: TextInputType.text,
@@ -144,7 +145,8 @@ class NotesDetailsPage extends StatelessWidget {
                     ),
                     // text field for entering description
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 10),
                       child: TextFormField(
                         minLines: 1,
                         maxLines: 50,
@@ -161,7 +163,7 @@ class NotesDetailsPage extends StatelessWidget {
                     // Update Button to Update the current Note with new Values
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 15.0),
+                          horizontal: 10.0, vertical: 20.0),
                       child: ElevatedButton(
                         onPressed: () {
                           // Checking fields
@@ -183,19 +185,25 @@ class NotesDetailsPage extends StatelessWidget {
                             notesDetailsController.isOpen.value = false;
                           }
                         },
-                        child: const Text('Update'),
+                        child: const Text(
+                          'Update',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                       ),
                     ),
                     // Close buttom to close the BottomSheet
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 15.0),
+                      padding: const EdgeInsets.only(
+                          bottom: 40, left: 10, right: 10, top: 10),
                       child: ElevatedButton(
                         onPressed: () {
                           // closing the Bottomsheet
                           notesDetailsController.isOpen.value = false;
                         },
-                        child: const Text('Close'),
+                        child: const Text(
+                          'Close',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                       ),
                     ),
                   ],
