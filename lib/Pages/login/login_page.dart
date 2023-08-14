@@ -35,8 +35,9 @@ class LogInPage extends StatelessWidget {
                     Text(
                       'Sign In',
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.yellowBase,
                       ),
                     ),
                   ],
@@ -60,8 +61,11 @@ class LogInPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextFormField(
+                        autofocus: true,
                         controller: emailController,
                         decoration: InputDecoration(
+                          labelStyle:
+                              const TextStyle(color: AppColors.labelColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -80,6 +84,8 @@ class LogInPage extends StatelessWidget {
                       TextFormField(
                         controller: passwordController,
                         decoration: InputDecoration(
+                          labelStyle:
+                              const TextStyle(color: AppColors.labelColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

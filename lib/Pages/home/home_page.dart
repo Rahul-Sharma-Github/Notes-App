@@ -95,6 +95,7 @@ class HomePage extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextField(
+                              autofocus: true,
                               controller: topicController,
                               decoration: const InputDecoration(
                                 labelText: 'Enter Note\'s Topic here',
@@ -144,8 +145,8 @@ class HomePage extends StatelessWidget {
                                   );
 
                                   // Resetting TextField
-                                  topicController.clear();
-                                  descriptionController.clear();
+                                  topicController.text = '';
+                                  descriptionController.text = '';
                                 }
                               },
                               child: const Padding(

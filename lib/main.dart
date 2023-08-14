@@ -22,6 +22,7 @@ import 'Authentication_Services/auth_controller.dart';
 // Device Preview
 import 'package:device_preview/device_preview.dart';
 
+// Colors
 import 'constants/colors.dart';
 
 // it will initialize our Flutter Firebase app before starting the App
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Notes App',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellowBase),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellowBase),
         // Button Theme
         elevatedButtonTheme: const ElevatedButtonThemeData(
           style: ButtonStyle(

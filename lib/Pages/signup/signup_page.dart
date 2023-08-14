@@ -35,8 +35,9 @@ class SignUpPage extends StatelessWidget {
                     Text(
                       'Sign Up',
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.yellowBase,
                       ),
                     ),
                   ],
@@ -62,6 +63,8 @@ class SignUpPage extends StatelessWidget {
                       TextFormField(
                         controller: nameController,
                         decoration: InputDecoration(
+                          labelStyle:
+                              const TextStyle(color: AppColors.labelColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -80,6 +83,8 @@ class SignUpPage extends StatelessWidget {
                       TextFormField(
                         controller: emailController,
                         decoration: InputDecoration(
+                          labelStyle:
+                              const TextStyle(color: AppColors.labelColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -98,6 +103,8 @@ class SignUpPage extends StatelessWidget {
                       TextFormField(
                         controller: passwordController,
                         decoration: InputDecoration(
+                          labelStyle:
+                              const TextStyle(color: AppColors.labelColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -114,6 +121,10 @@ class SignUpPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 50),
                       ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(vertical: 14)),
+                        ),
                         onPressed: () {
                           if (formKeySignUp.currentState!.validate()) {
                             // Saving Current State of Form
