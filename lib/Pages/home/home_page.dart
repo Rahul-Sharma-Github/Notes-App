@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                                   var mapData = {
                                     "topic": topic,
                                     "description": description,
-                                    "datetime": dateTime
+                                    "datetime": dateTime,
                                   };
 
                                   // Adding this map to Database with user's UID
