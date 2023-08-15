@@ -61,6 +61,7 @@ class SignUpPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextFormField(
+                        autofocus: true,
                         controller: nameController,
                         decoration: InputDecoration(
                           labelStyle:

@@ -36,7 +36,8 @@ class FirestoreServices {
           .then((documentSnapshot) =>
               print("Added Data with ID: ${documentSnapshot.id}"));
 
-      Get.snackbar('Note Added !', '');
+      Get.snackbar('Note Added !', '',
+          duration: const Duration(milliseconds: 800));
     } catch (e) {
       print(e);
     }
@@ -56,7 +57,8 @@ class FirestoreServices {
             onError: (e) => print("Error updating document $e"),
           );
       Get.back();
-      Get.snackbar('Note Deleted !', '');
+      Get.snackbar('Note Deleted !', '',
+          duration: const Duration(milliseconds: 800));
     } catch (e) {
       print(e);
     }
@@ -76,7 +78,8 @@ class FirestoreServices {
       ).then((value) => print("DocumentSnapshot successfully updated!"),
               onError: (e) => print("Error updating document $e"));
       Get.back();
-      Get.snackbar('Note Updated !', '');
+      Get.snackbar('Note Updated !', '',
+          duration: const Duration(milliseconds: 800));
     } catch (e) {
       print(e);
     }
@@ -142,11 +145,10 @@ class FirestoreServices {
               );
             },
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

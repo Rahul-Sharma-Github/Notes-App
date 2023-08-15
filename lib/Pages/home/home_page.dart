@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +54,11 @@ class HomePage extends StatelessWidget {
             title: const Text('Delete Account'),
             trailing: const Icon(Icons.person_off_outlined),
             onTap: () {
-              AuthenticationServices.deleteUserAccount();
+              try {
+                AuthenticationServices.deleteUserAccount();
+              } catch (e) {
+                print('Error while Deleting User Account = $e');
+              }
             },
           ),
         ]),
@@ -117,36 +123,41 @@ class HomePage extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                // Checking TextFields
-                                if (topicController.text.isEmpty ||
-                                    descriptionController.text.isEmpty) {
-                                  Get.snackbar('Warning ',
-                                      'Please Enter Something to add this Note !');
-                                } else {
-                                  // Getting Topic and Description from TextFields
-                                  // And Getting Date from Method
-                                  var topic = topicController.text;
-                                  var description = descriptionController.text;
-                                  var dateTime =
-                                      FirestoreServices.getCurrentDateTime();
+                                try {
+                                  // Checking TextFields
+                                  if (topicController.text.isEmpty ||
+                                      descriptionController.text.isEmpty) {
+                                    Get.snackbar('Warning ',
+                                        'Please Enter Something to add this Note !');
+                                  } else {
+                                    // Getting Topic and Description from TextFields
+                                    // And Getting Date from Method
+                                    var topic = topicController.text;
+                                    var description =
+                                        descriptionController.text;
+                                    var dateTime =
+                                        FirestoreServices.getCurrentDateTime();
 
-                                  // Creating Map from these variables
-                                  var mapData = {
-                                    "topic": topic,
-                                    "description": description,
-                                    "datetime": dateTime,
-                                  };
+                                    // Creating Map from these variables
+                                    var mapData = {
+                                      "topic": topic,
+                                      "description": description,
+                                      "datetime": dateTime,
+                                    };
 
-                                  // Adding this map to Database with user's UID
+                                    // Adding this map to Database with user's UID
 
-                                  FirestoreServices.addData(
-                                    mapData,
-                                    FirestoreServices.userUID,
-                                  );
+                                    FirestoreServices.addData(
+                                      mapData,
+                                      FirestoreServices.userUID,
+                                    );
 
-                                  // Resetting TextField
-                                  topicController.text = '';
-                                  descriptionController.text = '';
+                                    // Resetting TextField
+                                    topicController.text = '';
+                                    descriptionController.text = '';
+                                  }
+                                } catch (e) {
+                                  print('Error while Adding Data = $e');
                                 }
                               },
                               child: const Padding(

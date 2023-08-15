@@ -22,7 +22,8 @@ class AuthenticationServices {
       await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
       await FirebaseAuth.instance.currentUser?.reload();
 
-      Get.snackbar('', 'Account created Successfully !');
+      Get.snackbar('', 'Account created Successfully !',
+          duration: const Duration(milliseconds: 800));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar('Warning', 'The password provided is too weak.');
@@ -44,7 +45,8 @@ class AuthenticationServices {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
-      Get.snackbar('', 'Logged In Successfully !');
+      Get.snackbar('', 'Logged In Successfully !',
+          duration: const Duration(milliseconds: 800));
       // Get.to(() => const HomePage());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -64,7 +66,8 @@ class AuthenticationServices {
   static Future signOut() async {
     try {
       await FirebaseAuth.instance.signOut().then(
-            (value) => Get.snackbar('', 'User Signed Out !'),
+            (value) => Get.snackbar('', 'User Signed Out !',
+                duration: const Duration(milliseconds: 800)),
           );
     } catch (e) {
       print(e);
@@ -77,13 +80,13 @@ class AuthenticationServices {
       await FirebaseAuth.instance.currentUser!.delete().then(
             (value) => print('Account Deleted'),
           );
-      Get.snackbar('', 'User Account Deleted !');
+      Get.snackbar('', 'User Account Deleted !',
+          duration: const Duration(milliseconds: 800));
       // Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
-        Get.snackbar('', 'First, SignIn with a User Account !');
-        print(
-            'The user must reauthenticate before this operation can be executed.');
+        Get.snackbar('', 'First, SignIn with a User Account !',
+            duration: const Duration(milliseconds: 800));
       }
     } catch (e) {
       print(e);
