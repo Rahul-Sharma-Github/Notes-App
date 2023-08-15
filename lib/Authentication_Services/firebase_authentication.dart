@@ -75,8 +75,9 @@ class AuthenticationServices {
   static Future deleteUserAccount() async {
     try {
       await FirebaseAuth.instance.currentUser!.delete().then(
-            (value) => Get.snackbar('', 'User Account Deleted !'),
+            (value) => print('Account Deleted'),
           );
+      Get.snackbar('', 'User Account Deleted !');
       // Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
