@@ -144,18 +144,20 @@ class NotesDetailsPage extends StatelessWidget {
                       ),
                     ),
                     // text field for entering description
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
-                      child: TextFormField(
-                        minLines: 1,
-                        maxLines: 50,
-                        controller: descriptionController,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          labelText: 'Enter Description',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 10),
+                        child: TextFormField(
+                          minLines: 1,
+                          maxLines: 50,
+                          controller: descriptionController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            labelText: 'Enter Description',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                           ),
                         ),
                       ),
