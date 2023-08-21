@@ -17,10 +17,10 @@ class FirestoreServices {
       Get.put(NotesDetailsController());
 
   // Getting and initializing an Instance of our Cloud Firestore Database
-  static var db = FirebaseFirestore.instance;
+  // static var db = FirebaseFirestore.instance;
 
   // Getting currently signedIn user's UID
-  static var userUID = FirebaseAuth.instance.currentUser!.uid;
+  // static var userUID = FirebaseAuth.instance.currentUser!.uid;
 
   // Add data to Firestore Database
   // the data will be stored in 'users' collection and doc's unique ID will be Current SignedIn user's UID
@@ -28,9 +28,9 @@ class FirestoreServices {
   // and notes will be stored inside the 'notes' subcollection with auto generated document UID
   static Future addData(Map<String, dynamic> docData, String uid) async {
     try {
-      await db
+      await FirebaseFirestore.instance
           .collection('users')
-          .doc(userUID)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('notes')
           .add(docData)
           .then((documentSnapshot) =>
@@ -46,9 +46,9 @@ class FirestoreServices {
   // Delete a specific document from 'notes' collection
   static Future deleteData(String index) async {
     try {
-      await db
+      await FirebaseFirestore.instance
           .collection('users')
-          .doc(userUID)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('notes')
           .doc(index)
           .delete()
@@ -68,9 +68,9 @@ class FirestoreServices {
   static Future updateData(
       String index, String topic, String description, String datetime) async {
     try {
-      await db
+      await FirebaseFirestore.instance
           .collection('users')
-          .doc(userUID)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('notes')
           .doc(index)
           .update(
@@ -92,7 +92,7 @@ class FirestoreServices {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('users')
-          .doc(userUID)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('notes')
           .snapshots(),
       builder: (context, snapshot) {

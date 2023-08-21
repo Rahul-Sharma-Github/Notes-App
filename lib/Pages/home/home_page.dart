@@ -149,7 +149,7 @@ class HomePage extends StatelessWidget {
 
                                     FirestoreServices.addData(
                                       mapData,
-                                      FirestoreServices.userUID,
+                                      FirebaseAuth.instance.currentUser!.uid,
                                     );
 
                                     // Resetting TextField
