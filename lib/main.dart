@@ -38,7 +38,7 @@ Future<void> main() async {
       tools: const [
         ...DevicePreview.defaultTools,
       ],
-      builder: (context) => MyApp(), // Wrap your app
+      builder: (context) => MyApp(),
     ),
   );
 }
