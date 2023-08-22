@@ -1,6 +1,18 @@
 # Notes App
 #### It's a Full-Stack App.
 ##### User Can [ Add, Read, Update, Delete ] their Notes in this App.
+# 
+### Additional Features of app =
+##### Register New User Account
+##### Sign In
+##### Sign Out
+##### Delete User Account
+##### Add Multiple Notes
+##### Update Notes
+##### View All Notes
+##### Delete Notes
+##### Notes will be saved on cloud
+
 #
 ### Technologies used in this Project are =
 #### - Flutter
