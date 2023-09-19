@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 // Firebase Core + firebase_options
 import 'package:firebase_core/firebase_core.dart';
-import 'package:note_taking_app/Pages/login/login_page.dart';
 import 'package:note_taking_app/firebase_options.dart';
 
 // Firebase Authentication
@@ -15,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Project Pages import
 import 'package:note_taking_app/Pages/home/home_page.dart';
+import 'package:note_taking_app/Pages/login/login_page.dart';
 
 // Auth_controller
 import 'Authentication_Services/auth_controller.dart';
